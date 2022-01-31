@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import {Banks} from './Components/Banks';
+import {Dropdown} from './Components/Dropdown';
+import { Footer } from './Components/Footer';
+import {Header} from './Components/Header';
+import { Search } from './Components/Search';
 
 function App() {
+
+  const [banks, setBanks] = useState([]);
+  const [city, setCity] = useState("");
+  const [filteredbanks, setFilteredbanks] = useState([]);
+  const [keyword, setKeyword] = useState("")
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <div className="container p-4 mt-3 d-flex justify-content-between">
+        <div className=""><Dropdown setCity={setCity} /></div>
+        <div className="" ><Search banks={banks} keyword={keyword} setKeyword={setKeyword}
+                filteredbanks={filteredbanks} setFilteredbanks={setFilteredbanks}/></div>
+      </div>
+      <Banks city={city} banks={banks} setBanks={setBanks} setKeyword={setKeyword}
+              filteredbanks={filteredbanks} setFilteredbanks={setFilteredbanks} />
+      <Footer />
     </div>
   );
 }
